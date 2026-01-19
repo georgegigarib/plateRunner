@@ -1,0 +1,243 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Plates Runners - Automotive Night Highway Theme */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    /* Night highway palette */
+    --background: 220 30% 30%;
+    --foreground: 210 20% 95%;
+
+    --card: 220 18% 12%;
+    --card-foreground: 210 20% 95%;
+
+    --popover: 220 18% 14%;
+    --popover-foreground: 210 20% 95%;
+
+    /* Traffic amber - primary */
+    --primary: 42 95% 55%;
+    --primary-foreground: 220 20% 8%;
+
+    /* Asphalt gray - secondary */
+    --secondary: 220 12% 20%;
+    --secondary-foreground: 210 20% 90%;
+
+    --muted: 220 15% 18%;
+    --muted-foreground: 215 15% 55%;
+
+    /* Highway green - accent */
+    --accent: 145 65% 45%;
+    --accent-foreground: 220 20% 8%;
+
+    /* Traffic red - destructive */
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 15% 22%;
+    --input: 220 15% 18%;
+    --ring: 42 95% 55%;
+
+    --radius: 0.75rem;
+
+    /* Custom colors */
+    --highway-line: 48 100% 60%;
+    --asphalt: 220 15% 10%;
+    --asphalt-light: 220 12% 16%;
+    --plate-bg: 48 15% 90%;
+    --plate-text: 220 80% 15%;
+    --speed-sign: 0 0% 100%;
+    --speed-border: 0 75% 50%;
+
+    /* Car colors */
+    --car-red: 0 75% 50%;
+    --car-blue: 210 90% 50%;
+    --car-green: 145 65% 45%;
+    --car-yellow: 48 95% 55%;
+    --car-orange: 25 95% 55%;
+    --car-purple: 280 70% 55%;
+    --car-white: 0 0% 95%;
+    --car-black: 0 0% 15%;
+
+    --sidebar-background: 220 18% 10%;
+    --sidebar-foreground: 210 20% 90%;
+    --sidebar-primary: 42 95% 55%;
+    --sidebar-primary-foreground: 220 20% 8%;
+    --sidebar-accent: 220 12% 20%;
+    --sidebar-accent-foreground: 210 20% 90%;
+    --sidebar-border: 220 15% 22%;
+    --sidebar-ring: 42 95% 55%;
+  }
+
+  .dark {
+    --background: 220 20% 8%;
+    --foreground: 210 20% 95%;
+    --card: 220 18% 12%;
+    --card-foreground: 210 20% 95%;
+    --popover: 220 18% 14%;
+    --popover-foreground: 210 20% 95%;
+    --primary: 42 95% 55%;
+    --primary-foreground: 220 20% 8%;
+    --secondary: 220 12% 20%;
+    --secondary-foreground: 210 20% 90%;
+    --muted: 220 15% 18%;
+    --muted-foreground: 215 15% 55%;
+    --accent: 145 65% 45%;
+    --accent-foreground: 220 20% 8%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 220 15% 22%;
+    --input: 220 15% 18%;
+    --ring: 42 95% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Orbitron', sans-serif;
+  }
+}
+
+@layer components {
+  /* Highway road background */
+
+  .highway-bg::before {
+    content: '';
+    @apply absolute inset-0;
+    background: repeating-linear-gradient(to bottom, transparent 0px, transparent 80px, hsl(var(--highway-line)) 80px, hsl(var(--highway-line)) 180px);
+    width: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: highway-scroll 3.4s linear infinite;
+    top: -40%;
+  }
+
+  @keyframes highway-scroll {
+    0% {
+      transform: translateX(-50%) translateY(0);
+    }
+    100% {
+      transform: translateX(-50%) translateY(200px);
+    }
+  }
+
+  /* Speed sign control */
+  .speed-sign {
+    @apply relative w-16 h-16 rounded-full flex items-center justify-center;
+    background: hsl(var(--speed-sign));
+    border: 4px solid hsl(var(--speed-border));
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    color: hsl(var(--plate-text));
+  }
+
+  .speed-sign.inactive {
+    @apply opacity-40;
+  }
+
+  /* License plate styling */
+  .license-plate {
+    @apply relative px-4 py-2 rounded-md font-bold text-center tracking-wider;
+    background: linear-gradient(180deg, hsl(48 20% 95%) 0%, hsl(48 15% 88%) 100%);
+    color: hsl(var(--plate-text));
+    font-family: 'Orbitron', sans-serif;
+    border: 3px solid hsl(220 15% 30%);
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.5), 0 2px 8px rgba(0, 0, 0, 0.4);
+    min-width: 120px;
+    max-width: 200px;
+  }
+
+  /* Glass card effect */
+  .glass-card {
+    @apply backdrop-blur-md border;
+    background: hsl(var(--card) / 0.8);
+    border-color: hsl(var(--border) / 0.5);
+  }
+
+  /* Glow effects */
+  .glow-primary {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.4);
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 20px hsl(var(--accent) / 0.4);
+  }
+
+  /* Traffic button variants */
+  .btn-traffic {
+    @apply transition-all duration-200;
+  }
+
+  .btn-traffic:hover {
+    transform: scale(1.05);
+  }
+
+  .btn-traffic:active {
+    transform: scale(0.98);
+  }
+
+  /* List color badges */
+  .list-color {
+    @apply w-4 h-4 rounded-full ring-2 ring-offset-2 ring-offset-background;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Orbitron', sans-serif;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 10px currentColor;
+  }
+
+  .text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+}
+
+@keyframes driveUp {
+  from {
+    transform: translate(-50%, 40vh) scale(1.5);
+  }
+  to {
+    transform: translate(-50%, -100vh) scale(0.8);
+  }
+}
+
+.animate-drive {
+  animation: driveUp linear forwards;
+}
+
+.animate-drive-up {
+  animation: drive-up 3s ease-out forwards;
+}
+
+@keyframes drive-up {
+  0% {
+    transform: translateY(100vh) scale(1.4);
+  }
+  100% {
+    transform: translateY(-100vh) scale(0.7);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
